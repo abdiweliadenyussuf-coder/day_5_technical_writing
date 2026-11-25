@@ -1,8 +1,8 @@
 # DAY 5 ASSIGNMENT: TECHNICAL WRITING
 
-## A) USER MANUAL PROCEDURE
+# A) USER MANUAL PROCEDURE
 
-### Task: Setting Up a GitHub Repository and Making the First Commit
+## Task: Setting Up a GitHub Repository and Making the First Commit
 
 ### 1. Introduction
 
@@ -98,9 +98,9 @@ Following these steps helps beginners create a GitHub repository and make their 
 
 ---
 
-## B) API REFERENCE ENTRY
+# B) API REFERENCE ENTRY
 
-### API Name: Create a New Task
+## API Name: Create a New Task
 
 ### 1. Overview
 
@@ -111,6 +111,7 @@ The Create Task API allows an authenticated user to create a new task within a p
 **HTTP Method:** POST
 
 **Endpoint:**
+
 `/api/v1/projects/{projectId}/tasks`
 
 **Description:** Creates a new task inside a specified project.
@@ -134,7 +135,7 @@ No query parameters are required for this endpoint.
 | title | String | Yes | Name or title of the task. |
 | description | String | No | Additional information about the task. |
 | assigneeId | String (UUID) | Yes | ID of the user assigned to the task. |
-| dueDate | String (Date) | Yes | Date when the task should be completed. |
+| dueDate | String (ISO 8601 date: YYYY-MM-DD) | Yes | Date when the task should be completed. Example: 2026-12-15. |
 | priority | String | Yes | Priority level: low, medium, or high. |
 
 ### 4. Required Request Headers
@@ -191,6 +192,29 @@ No query parameters are required for this endpoint.
 }
 ```
 
-### 8. Conclusion
+### 8. Example Error Response
+
+**Status Code:** 400 Bad Request
+
+This response occurs when the request contains missing or invalid information.
+
+```json
+{
+  "success": false,
+  "message": "Invalid request data",
+  "errors": [
+    {
+      "field": "title",
+      "message": "Task title is required."
+    },
+    {
+      "field": "priority",
+      "message": "Priority must be low, medium, or high."
+    }
+  ]
+}
+```
+
+### 9. Conclusion
 
 The Create Task API provides a simple way for authenticated users to add tasks to projects. It accepts task information in JSON format and returns a response indicating whether the task was created successfully. The API also uses HTTP status codes to communicate errors and successful operations.
